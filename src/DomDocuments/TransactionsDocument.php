@@ -136,6 +136,12 @@ class TransactionsDocument extends BaseDocument
                 $lineElement->appendChild($dim2Element);
             }
 
+            $quantity = $transactionLine->getQuantity();
+            if (!empty($quantity)) {
+                $quantityElement = $this->createNodeWithTextContent('quantity', $quantity);
+                $lineElement->appendChild($quantityElement);
+            }            
+            
             $this->appendValueValues($lineElement, $transactionLine);
 
             if (Util::objectUses(PerformanceFields::class, $transactionLine)) {
