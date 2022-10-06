@@ -48,6 +48,11 @@ abstract class BaseTransactionLine implements TransactionLine
      * @var int|null The line ID.
      */
     protected $id;
+    
+    /**
+     * @var int|null Quantity.
+     */
+    protected $quantity;
 
     /**
      * @var Money|null Amount in the base currency.
@@ -146,6 +151,25 @@ abstract class BaseTransactionLine implements TransactionLine
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int|null $quantity
+     * @return $this
+     */
+    public function setQuantity(?int $quantity): BaseTransactionLine
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+    
     /**
      * @return Money|null
      */
