@@ -9,7 +9,7 @@ class IndividualMappedResponse
     /**
      * @var Response
      */
-    private $response;
+    public $response;
     /**
      * @var callable
      */
