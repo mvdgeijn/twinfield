@@ -120,10 +120,11 @@ class Detail extends Base
      * Amount without VAT.
      *
      * @param Money $money
+     * return Detail
      */
-    public function setValue(Money $money): void
+    public function setValue(Money $money): self
     {
-        parent::setValue($money);
+        return parent::setValue($money);
     }
 
 
