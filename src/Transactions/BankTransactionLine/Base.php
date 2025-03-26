@@ -67,15 +67,12 @@ abstract class Base implements TransactionLine
 
     /**
      * @param BankTransaction $object
-     * @return $this
      */
-    public function setTransaction($object)
+    public function setTransaction($object): void
     {
         Assert::null($this->transaction, "Attempting to set a transaction while the transaction is already set.");
         Assert::isInstanceOf($object, BankTransaction::class);
         $this->transaction = $object;
-
-        return $this;
     }
 
     /**
