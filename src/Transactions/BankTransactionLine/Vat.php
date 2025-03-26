@@ -25,10 +25,13 @@ class Vat extends Base
      * as entered at the VAT code in Twinfield.
      *
      * @param string $dim1
+     * @return Vat
      */
-    public function setVatBalanceAccount(string $dim1)
+    public function setVatBalanceAccount(string $dim1): self
     {
         $this->setDim1($dim1);
+
+        return $this;
     }
 
     /**
