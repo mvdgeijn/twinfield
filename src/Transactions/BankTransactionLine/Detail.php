@@ -121,9 +121,9 @@ class Detail extends Base
      *
      * @param Money $money
      */
-    public function setValue(Money $money): void
+    public function setValue(Money $money)
     {
-        parent::setValue($money);
+        return parent::setValue($money);
     }
 
 
