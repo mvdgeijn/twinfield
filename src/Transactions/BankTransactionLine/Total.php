@@ -37,6 +37,8 @@ class Total extends Base
     public function setBankBalanceAccount(string $dim1)
     {
         $this->setDim1($dim1);
+
+        return $this;
     }
 
     /**
@@ -56,9 +58,11 @@ class Total extends Base
      *
      * @param Money $money
      */
-    public function setValue(Money $money): void
+    public function setValue(Money $money)
     {
         parent::setValue($money);
+
+        return $this;
     }
 
     /**
@@ -74,9 +78,11 @@ class Total extends Base
      *
      * @param Money $vatTotal
      */
-    public function setVatTotal(Money $vatTotal): void
+    public function setVatTotal(Money $vatTotal)
     {
         $this->vatTotal = $vatTotal;
+
+        return $this;
     }
 
     /**
@@ -92,9 +98,11 @@ class Total extends Base
      *
      * @param Money $vatBaseTotal
      */
-    public function setVatBaseTotal(Money $vatBaseTotal): void
+    public function setVatBaseTotal(Money $vatBaseTotal)
     {
         $this->vatBaseTotal = $vatBaseTotal;
+
+        return $this;
     }
 
     /**
@@ -108,8 +116,10 @@ class Total extends Base
     /**
      * @param Money $vatRepTotal
      */
-    public function setVatRepTotal(Money $vatRepTotal): void
+    public function setVatRepTotal(Money $vatRepTotal)
     {
         $this->vatRepTotal = $vatRepTotal;
+
+        return $this;
     }
 }
