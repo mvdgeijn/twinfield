@@ -34,9 +34,9 @@ class Total extends Base
         $this->setLineType(LineType::TOTAL());
     }
 
-    public function setBankBalanceAccount(string $dim1)
+    public function setBankBalanceAccount(string $dim1): self
     {
-        $this->setDim1($dim1);
+        return $this->setDim1($dim1);
     }
 
     /**
@@ -46,7 +46,7 @@ class Total extends Base
      * @param DebitCredit $debitCredit
      * @return $this
      */
-    public function setDebitCredit(DebitCredit $debitCredit)
+    public function setDebitCredit(DebitCredit $debitCredit): self
     {
         return parent::setDebitCredit($debitCredit);
     }
@@ -56,9 +56,9 @@ class Total extends Base
      *
      * @param Money $money
      */
-    public function setValue(Money $money): void
+    public function setValue(Money $money): self
     {
-        parent::setValue($money);
+        return parent::setValue($money);
     }
 
     /**
@@ -74,9 +74,11 @@ class Total extends Base
      *
      * @param Money $vatTotal
      */
-    public function setVatTotal(Money $vatTotal): void
+    public function setVatTotal(Money $vatTotal): self
     {
         $this->vatTotal = $vatTotal;
+
+        return $this;
     }
 
     /**
@@ -91,10 +93,13 @@ class Total extends Base
      * The total VAT amount in base currency.
      *
      * @param Money $vatBaseTotal
+     * @return Total
      */
-    public function setVatBaseTotal(Money $vatBaseTotal): void
+    public function setVatBaseTotal(Money $vatBaseTotal): self
     {
         $this->vatBaseTotal = $vatBaseTotal;
+
+        return $this;
     }
 
     /**
@@ -107,9 +112,12 @@ class Total extends Base
 
     /**
      * @param Money $vatRepTotal
+     * @return Total
      */
-    public function setVatRepTotal(Money $vatRepTotal): void
+    public function setVatRepTotal(Money $vatRepTotal): self
     {
         $this->vatRepTotal = $vatRepTotal;
+
+        return $this;
     }
 }
