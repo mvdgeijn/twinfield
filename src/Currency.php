@@ -21,6 +21,12 @@ class Currency
     {
         return $this->getOffice()->getCode();
     }
+    
+    public function setOfficeByCode(string $code): self
+    {
+        $this->setOffice( ( new Office() )->setCode($code) );
+        return $this;
+    }
 
     public function getCode()
     {
