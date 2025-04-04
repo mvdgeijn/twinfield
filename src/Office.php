@@ -31,9 +31,11 @@ class Office
         return $this->code;
     }
 
-    public function setCode(string $code): void
+    public function setCode(string $code): self
     {
         $this->code = $code;
+        
+        return $this;
     }
 
     public function getCountryCode(): string
@@ -41,9 +43,11 @@ class Office
         return $this->countryCode;
     }
 
-    public function setCountryCode(string $countryCode): void
+    public function setCountryCode(string $countryCode): self
     {
         $this->countryCode = $countryCode;
+        
+        return $this;
     }
 
     public function getName(): string
@@ -51,9 +55,11 @@ class Office
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        
+        return $this;
     }
 
     public function __toString()
