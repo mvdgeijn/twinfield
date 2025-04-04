@@ -2,7 +2,7 @@
 namespace PhpTwinfield\Mappers;
 
 use PhpTwinfield\Currency;
-use PhpTwinfield\CurrencyLine;
+use PhpTwinfield\CurrencyRate;
 use PhpTwinfield\Response\Response;
 
 /**
@@ -34,12 +34,18 @@ class CurrencyMapper extends BaseMapper
         $responseDOM = $response->getResponseDocument();
 
         // Article elements and their methods
-        $articleTags = [
+        $currencyTags = [
             'code'                       => 'setCode',
-            'office'                     => 'setOffice',
+            'office'                     => 'setOfficeByCode',
             'name'                       => 'setName',
             'shortname'                  => 'setShortName'
         ];
+
+        foreach ($currencyTags as $tagName => $tagValue) {
+            $value = $responseDOM->getElementsByTagName($tagName)->item(0)->nodeValue;
+            $method = $currencyTags[$tagName];
+            $currency->$method($value);
+        }
 
         $ratesDOMTag = $responseDOM->getElementsByTagName('rates');
 
@@ -55,20 +61,20 @@ class CurrencyMapper extends BaseMapper
 
             // Loop through each returned line for the article
             foreach ($ratesDOM->getElementsByTagName('rate') as $rateDom) {
+                if( $rateDom->childElementCount > 0 ) {
+                    // Make a new tempory CurrencyRate class
+                    $rateLine = new CurrencyRate();
 
-                // Make a new tempory ArticleLine class
-                $rateLine = new currencyLine();
+                    // Set the attributes ( id,status,inuse)
+                    $rateLine->setStartdate($rateDom->getElementsByTagName('startdate')->item(0)->nodeValue)
+                        ->setRate($rateDom->getElementsByTagName('rate')->item(0)->nodeValue);
 
-                // Set the attributes ( id,status,inuse)
-                $rateLine->setStatus($rateDom->getAttribute('status'))
-                    ->setStartdate($rateDom->getAttribute('startdate'))
-                    ->setRate($rateDom->getAttribute('rate'));
+                    // Add the bank to the customer
+                    $currency->addRate($rateLine);
 
-                // Add the bank to the customer
-                $currency->addLine($rateLine);
-
-                // Clean that memory!
-                unset ($rateLine);
+                    // Clean that memory!
+                    unset ($rateLine);
+                }
             }
         }
         return $currency;
