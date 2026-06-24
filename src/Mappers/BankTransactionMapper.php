@@ -31,6 +31,19 @@ class BankTransactionMapper extends BaseMapper
             $bankTransaction->setRaiseWarning(Util::parseBoolean($element->getAttribute("raisewarning")));
         }
 
+        $destiny = $transactionElement->getAttribute('location');
+        if (empty($destiny)) {
+            /*
+             * This field should be sent to Twinfield as 'destiny' attribute and Twinfield should return it as
+             * 'location' attribute. But in case of an error elsewhere in this object, Twinfield returns this field as
+             * 'destiny' attribute.
+             */
+            $destiny = $transactionElement->getAttribute('destiny');
+        }
+        if (!empty($destiny)) {
+            $transaction->setDestiny(new Destiny($destiny));
+        }
+
         self::setFromTagValue($document, "code", [$bankTransaction, "setCode"]);
         self::setFromTagValue($document, "office", [$bankTransaction, "setOffice"]);
         self::setFromTagValue($document, "date", [$bankTransaction, "setDate"]);
