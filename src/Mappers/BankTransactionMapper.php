@@ -11,6 +11,7 @@ use PhpTwinfield\Transactions\BankTransactionLine\Detail;
 use PhpTwinfield\Transactions\BankTransactionLine\Total;
 use PhpTwinfield\Transactions\BankTransactionLine\Vat;
 use PhpTwinfield\Util;
+use PhpTwinfield\Enums\Destiny;
 
 class BankTransactionMapper extends BaseMapper
 {
