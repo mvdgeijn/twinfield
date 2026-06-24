@@ -31,6 +31,10 @@ class BankTransactionMapper extends BaseMapper
             $bankTransaction->setRaiseWarning(Util::parseBoolean($element->getAttribute("raisewarning")));
         }
 
+        if(! empty($element->getAttribute('location'))) {
+            $bankTransaction->setDestiny(Destiny::tryFrom($element->getAttribute('location')) ?? Destiny::TEMPORARY() );
+        }
+
         self::setFromTagValue($document, "code", [$bankTransaction, "setCode"]);
         self::setFromTagValue($document, "office", [$bankTransaction, "setOffice"]);
         self::setFromTagValue($document, "date", [$bankTransaction, "setDate"]);
