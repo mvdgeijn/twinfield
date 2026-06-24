@@ -9,12 +9,32 @@ use PhpTwinfield\Mappers\BankTransactionMapper;
 use PhpTwinfield\Response\IndividualMappedResponse;
 use PhpTwinfield\Response\MappedResponseCollection;
 use PhpTwinfield\Response\Response;
+use PhpTwinfield\Office;
+use PhpTwinfield\Request\Read\Transaction as ReadTransaction;
 use Webmozart\Assert\Assert;
 
 class BankTransactionApiConnector extends BaseApiConnector
 {
     use BookingReferenceDeletionTrait;
 
+    /**
+     * Haalt één banktransactie op via code (dagboek), boekingsnummer en office.
+     *
+     * @throws Exception
+     */
+    public function get(string $code, string $transactionNumber, Office $office): BankTransaction
+    {
+        $request = new ReadTransaction();
+        $request
+            ->setCode($code)
+            ->setNumber($transactionNumber)
+            ->setOffice($office);
+
+        $response = $this->sendXmlDocument($request);
+
+        return BankTransactionMapper::map($response->getResponseDocument());
+    }
+    
     /**
      * Sends a BankTransaction instance to Twinfield to update or add.
      *
